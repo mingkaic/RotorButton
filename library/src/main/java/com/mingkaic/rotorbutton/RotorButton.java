@@ -9,16 +9,12 @@ import android.view.View;
 import android.view.ViewParent;
 import android.widget.Button;
 
-import com.mingkaic.rotorbutton.utils.AudioUtil;
-import com.mingkaic.rotorbutton.utils.VibrateUtil;
 import com.nineoldandroids.view.ViewHelper;
 
 public class RotorButton extends Button {
 
     public interface OnOrientationChangedListener {
         void onOrientationChanged(int action, double orientation);
-
-        void onTapOrientationChanged(double orientation);
     }
 
     // rotation_speed attributes
@@ -33,7 +29,8 @@ public class RotorButton extends Button {
 
     private double currentOrientation = 0; // in degrees
 
-    private Pair<Double, Double> blockCenter;
+    private float pivotX;
+    private float pivotY;
 
     OnOrientationChangedListener onOrientationChangedListener;
 
@@ -60,8 +57,6 @@ public class RotorButton extends Button {
         vibrationDuration = attr.getInt(R.styleable.RotatingButton_mb_vibration_duration, 0);
         eventVolume = attr.getInt(R.styleable.RotatingButton_mb_event_volume, 0);
 
-        blockCenter = new Pair<Double, Double>(new Double(this.getWidth() / 2.0f), new Double(this.getHeight() / 2.0f));
-
         recalculateOrientation(this);
 
         attr.recycle();
@@ -73,20 +68,17 @@ public class RotorButton extends Button {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 requestTouchEvent();
+                pivotX = this.getWidth() / 2.0f;
+                pivotY = this.getHeight() / 2.0f;
                 orientationChanged(MotionEvent.ACTION_DOWN, currentOrientation);
-//                soundAndVibrate();
                 break;
             case MotionEvent.ACTION_MOVE:
-                Pair<Double, Double> coords = polar2Cartesian(blockCenter, offsetCenter, currentOrientation);
-                float diffX = event.getX() - coords.first.floatValue();
-                float diffY = coords.second.floatValue() - event.getY();
+                float diffX = event.getX() - pivotX;
+                float diffY = pivotY - event.getY();
                 double tapAngle = getAngle(diffX, diffY);
                 boolean ccw = isAClockwise(tapAngle);
                 rotorView(this, ccw);
-
-                onOrientationChangedListener.onTapOrientationChanged(tapAngle);
                 orientationChanged(MotionEvent.ACTION_MOVE, currentOrientation);
-
                 break;
             case MotionEvent.ACTION_UP:
             case MotionEvent.ACTION_CANCEL:
@@ -97,8 +89,7 @@ public class RotorButton extends Button {
 
     private void rotorView(View v, boolean isAClockwise) {
         // re-calculate orientation
-        // todo: calculate delta orientation by offset and movement
-        double dOrientation = 2;
+        double dOrientation = rotation_speed;
         if (!isAClockwise)
             dOrientation = -dOrientation;
         currentOrientation += (dOrientation + 360);
@@ -107,7 +98,8 @@ public class RotorButton extends Button {
     }
 
     private void recalculateOrientation(View v) {
-        Pair<Double, Double> coords = polar2Cartesian(blockCenter, offsetCenter, currentOrientation);
+        Pair<Double, Double> coords = polar2Cartesian(offsetCenter, currentOrientation);
+
         ViewHelper.setTranslationX(v, coords.first.floatValue());
         ViewHelper.setTranslationY(v, -coords.second.floatValue());
     }
@@ -119,11 +111,11 @@ public class RotorButton extends Button {
         return upperOri >= tapOrientation && tapOrientation > lowerOri;
     }
 
-    private Pair<Double, Double> polar2Cartesian (Pair<Double, Double> center, int radius, double theta_deg) {
+    private Pair<Double, Double> polar2Cartesian(int radius, double theta_deg) {
         double theta = theta_deg * Math.PI / 180;
-        double dx = radius * Math.cos(theta);
-        double dy = radius * Math.sin(theta);
-        return new Pair<>(center.first + dx, center.second + dy);
+        double x = radius * Math.cos(theta);
+        double y = radius * Math.sin(theta);
+        return new Pair<>(x, y);
     }
 
     private double getAngle(double dX, double dY) {
@@ -146,11 +138,6 @@ public class RotorButton extends Button {
         return rad * 180 / Math.PI;
     }
 
-    private void soundAndVibrate() {
-        VibrateUtil.vibtate(getContext(), vibrationDuration);
-        AudioUtil.playKeyClickSound(getContext(), eventVolume);
-    }
-
     private void orientationChanged(int action, double orientation) {
         if (onOrientationChangedListener != null)
             onOrientationChangedListener.onOrientationChanged(action, orientation);
@@ -169,15 +156,15 @@ public class RotorButton extends Button {
     }
 
     public void setRotation_speed(double rotation_speed) {
-        this.rotation_speed = rotation_speed;
+        this.rotation_speed = rotation_speed % 50;
     }
 
-    public int getVibrationDuration() {
-        return vibrationDuration;
+    public OnOrientationChangedListener getOnOrientationChangedListener() {
+        return onOrientationChangedListener;
     }
 
-    public void setVibrationDuration(int vibrationDuration) {
-        this.vibrationDuration = vibrationDuration;
+    public void setOnOrientationChangedListener(OnOrientationChangedListener onOrientationChangedListener) {
+        this.onOrientationChangedListener = onOrientationChangedListener;
     }
 
     public int getOffsetCenter() {
@@ -187,22 +174,6 @@ public class RotorButton extends Button {
     public void setOffsetCenter(int offsetCenter) {
         this.offsetCenter = offsetCenter;
         recalculateOrientation(this);
-    }
-
-    public int getEventVolume() {
-        return eventVolume;
-    }
-
-    public void setEventVolume(int eventVolume) {
-        this.eventVolume = eventVolume;
-    }
-
-    public OnOrientationChangedListener getOnOrientationChangedListener() {
-        return onOrientationChangedListener;
-    }
-
-    public void setOnOrientationChangedListener(OnOrientationChangedListener onOrientationChangedListener) {
-        this.onOrientationChangedListener = onOrientationChangedListener;
     }
 
 }

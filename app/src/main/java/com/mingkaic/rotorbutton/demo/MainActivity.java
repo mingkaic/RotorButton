@@ -22,8 +22,6 @@ public class MainActivity extends ActionBarActivity {
     RotorButton rotatingButton;
     @Bind(R.id.current_orientation_info)
     TextView currentOrientationInfo;
-    @Bind(R.id.tap_orientation_info)
-    TextView tapOrientationInfo;
 
     @Bind(R.id.rotation_speed_bt)
     View rotation_speedBt;
@@ -33,14 +31,6 @@ public class MainActivity extends ActionBarActivity {
     View centerOffsetBt;
     @Bind(R.id.rotation_center_offset_tv)
     TextView centerOffsetTv;
-    @Bind(R.id.volume_bt)
-    View volumeBt;
-    @Bind(R.id.volume_tv)
-    TextView volumeTv;
-    @Bind(R.id.vibration_duration_bt)
-    View vibrationDurationBt;
-    @Bind(R.id.vibration_duration_tv)
-    TextView vibrationDurationTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +44,7 @@ public class MainActivity extends ActionBarActivity {
 
             @Override
             public void onOrientationChanged(int action, double orientation) {
-                currentOrientationInfo.setText(String.valueOf(orientation));
-            }
-
-            @Override
-            public void onTapOrientationChanged(double orientation) {
-                tapOrientationInfo.setText(String.valueOf(orientation));
+                currentOrientationInfo.setText(String.valueOf(orientation) + "˚");
             }
 
         });
@@ -67,105 +52,53 @@ public class MainActivity extends ActionBarActivity {
         rotation_speedBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title(getString(R.string.rotation_speed))
-                        .items(getDPLists(0))
-                        .itemsCallbackSingleChoice((int) rotatingButton.getRotation_speed(), new MaterialDialog.ListCallbackSingleChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
-                                rotatingButton.setRotation_speed((double) which);
-                                rotation_speedTv.setText("" + which + "%");
-                                return true;
-                            }
-                        })
-                        .positiveText(getString(R.string.choose))
-                        .show();
+            new MaterialDialog.Builder(MainActivity.this)
+                .title(getString(R.string.rotation_speed))
+                .items(getDegLists())
+                .itemsCallbackSingleChoice((int) rotatingButton.getRotation_speed() - 1, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
+                        rotatingButton.setRotation_speed((double) (which + 1));
+                        rotation_speedTv.setText("" + (which + 1) + "˚");
+                        return true;
+                    }
+                })
+                .positiveText(getString(R.string.choose))
+                .show();
             }
         });
 
         centerOffsetBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title(getString(R.string.center_offset))
-                        .items(getDPLists2(0))
-                        .itemsCallbackSingleChoice(dpFromPx(rotatingButton.getOffsetCenter()), new MaterialDialog.ListCallbackSingleChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
-                                rotatingButton.setOffsetCenter(pxFromDp(which));
-                                centerOffsetTv.setText("" + which + "dp");
-                                return true;
-                            }
-                        })
-                        .positiveText(getString(R.string.choose))
-                        .show();
-            }
-        });
-
-        volumeBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title(getString(R.string.volume))
-                        .items(getVolumeLists())
-                        .itemsCallbackSingleChoice(rotatingButton.getEventVolume(), new MaterialDialog.ListCallbackSingleChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
-                                rotatingButton.setEventVolume(which);
-                                volumeTv.setText("" + which);
-                                return true;
-                            }
-                        })
-                        .positiveText(getString(R.string.choose))
-                        .show();
-            }
-        });
-
-        vibrationDurationBt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new MaterialDialog.Builder(MainActivity.this)
-                        .title(getString(R.string.vibration_duration))
-                        .items(getVibrationLists())
-                        .itemsCallbackSingleChoice(rotatingButton.getVibrationDuration(), new MaterialDialog.ListCallbackSingleChoice() {
-                            @Override
-                            public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
-                                rotatingButton.setVibrationDuration(which);
-                                vibrationDurationTv.setText(which + " Milliseconds");
-                                return true;
-                            }
-                        })
-                        .positiveText(getString(R.string.choose))
-                        .show();
+            new MaterialDialog.Builder(MainActivity.this)
+                .title(getString(R.string.center_offset))
+                .items(getDPLists())
+                .itemsCallbackSingleChoice(dpFromPx(rotatingButton.getOffsetCenter()) - 20, new MaterialDialog.ListCallbackSingleChoice() {
+                    @Override
+                    public boolean onSelection(MaterialDialog materialDialog, View view, int which, CharSequence text) {
+                        rotatingButton.setOffsetCenter(pxFromDp(which + 20));
+                        centerOffsetTv.setText("" + (which + 20) + "dp");
+                        return true;
+                    }
+                })
+                .positiveText(getString(R.string.choose))
+                .show();
             }
         });
     }
 
-    private String[] getVibrationLists() {
-        String[] names = new String[101];
+    private String[] getDegLists() {
+        String[] names = new String[20];
         for (int i = 0; i < names.length; i++)
-            names[i] = "" + i + " Milliseconds";
+            names[i] = "" + (i + 1) + "˚";
         return names;
     }
 
-    private String[] getDPLists(int start) {
-        String[] names = new String[41];
-        for (int i = 0; i < names.length; i++)
-            names[i] = "" + (start + i) + "dp";
-        return names;
-    }
-
-    private String[] getDPLists2(int start) {
+    private String[] getDPLists() {
         String[] names = new String[51];
         for (int i = 0; i < names.length; i++)
-            names[i] = "" + (start + i) + "dp";
-        return names;
-    }
-
-    private String[] getVolumeLists() {
-        String[] names = new String[101];
-        for (int i = 0; i < names.length; i++)
-            names[i] = "" + i;
+            names[i] = "" + (i + 20) + "dp";
         return names;
     }
 

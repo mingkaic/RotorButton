@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<dimen name="default_offset_center">20dp</dimen>
+	<dimen name="default_offset_center">30dp</dimen>
 </resources>

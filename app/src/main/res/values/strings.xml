@@ -1,6 +1,6 @@
 <resources>
 	<string name="app_name">RotorButton</string>
-	<string name="move">Move</string>
+	<string name="drag">Drag</string>
 	<string name="settings">SETTINGS</string>
 	<string name="mb_rotation_speed">mb_rotation_speed</string>
 	<string name="mb_offset_center">mb_offset_center</string>
@@ -12,7 +12,7 @@
 	<string name="cancel">Cancel</string>
 	<string name="vibration_duration">Vibration Duration</string>
 	<string name="ok">OK</string>
-	<string name="rotation_speed">Movement</string>
+	<string name="rotation_speed">Rotation</string>
 	<string name="center_offset">Center Offset</string>
 	<string name="volume">Volume</string>
 </resources>

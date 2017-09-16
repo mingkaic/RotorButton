@@ -43,53 +43,26 @@
 						android:includeFontPadding="false"/>
 			</LinearLayout>
 
-			<LinearLayout
-					android:layout_width="match_parent"
-					android:layout_height="wrap_content"
-					android:layout_marginLeft="16dp"
-					android:layout_marginTop="10dp"
-					android:layout_marginBottom="10dp">
-
-				<TextView
-						android:layout_width="wrap_content"
-						android:layout_height="wrap_content"
-						android:text="@string/tap_orientation"
-						android:textColor="@color/accent"
-						android:textSize="14dp"
-						android:textStyle="bold"
-						android:includeFontPadding="false"/>
-				<TextView
-						android:id="@+id/tap_orientation_info"
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginLeft="10dp"
-						android:text="0"
-						android:textColor="@color/primary_text"
-						android:textSize="14dp"
-						android:textStyle="bold"
-						android:includeFontPadding="false"/>
-			</LinearLayout>
-
 			<FrameLayout
 					android:layout_width="match_parent"
-					android:layout_height="220dp" android:layout_weight="0.36">
+					android:layout_height="320dp" android:layout_weight="0.36">
 
 				<View
 						android:layout_width="match_parent"
 						android:layout_height="0.5dp"
-						android:layout_marginTop="80dp"
+						android:layout_marginTop="130dp"
 						android:background="@color/accent"/>
 
 				<View
 						android:layout_width="match_parent"
 						android:layout_height="0.5dp"
-						android:layout_marginTop="110dp"
+						android:layout_marginTop="160dp"
 						android:background="@color/accent"/>
 
 				<View
 						android:layout_width="match_parent"
 						android:layout_height="0.5dp"
-						android:layout_marginTop="140dp"
+						android:layout_marginTop="190dp"
 						android:background="@color/accent"/>
 
 				<View
@@ -118,11 +91,11 @@
 						android:layout_height="60dp"
 						android:background="@drawable/button_background"
 						android:layout_gravity="center_horizontal"
-						android:layout_marginTop="80dp"
+						android:layout_marginTop="130dp"
 						android:layout_marginBottom="45dp"
 						android:textSize="16dp"
 						android:textColor="@android:color/white"
-						android:text="@string/move"
+						android:text="@string/drag"
 						android:includeFontPadding="false"
 						app:mb_event_volume="50"
 						app:mb_vibration_duration="20"
@@ -172,7 +145,7 @@
 							android:layout_marginBottom="4dp"
 							android:textColor="?android:attr/textColorPrimary"
 							android:textSize="16dp"
-							android:text="10dp"
+							android:text="2˚"
 							android:includeFontPadding="false"/>
 
 					<TextView
@@ -184,12 +157,6 @@
 							android:includeFontPadding="false"/>
 				</LinearLayout>
 			</LinearLayout>
-
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginLeft="74dp"
-					android:background="@color/divider"/>
 
 			<View
 					android:layout_width="match_parent"
@@ -226,7 +193,7 @@
 							android:layout_marginBottom="4dp"
 							android:textColor="?android:attr/textColorPrimary"
 							android:textSize="16dp"
-							android:text="16dp"
+							android:text="30dp"
 							android:includeFontPadding="false"/>
 
 					<TextView
@@ -245,101 +212,6 @@
 					android:layout_marginLeft="74dp"
 					android:background="@color/divider"/>
 
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginLeft="74dp"
-					android:background="@color/divider"/>
-
-			<LinearLayout
-					android:id="@+id/volume_bt"
-					android:layout_width="match_parent"
-					android:layout_height="70dp"
-					android:background="@drawable/selector"
-					android:clickable="true"
-					android:focusable="true"
-					android:gravity="center_vertical">
-
-				<View
-						android:layout_width="48dp"
-						android:layout_height="48dp"
-						android:layout_marginLeft="16dp"
-						android:background="@drawable/ic_volume"/>
-
-				<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginLeft="10dp"
-						android:layout_marginRight="16dp"
-						android:orientation="vertical">
-
-					<TextView
-							android:id="@+id/volume_tv"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginBottom="4dp"
-							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="16dp"
-							android:text="50"
-							android:includeFontPadding="false"/>
-
-					<TextView
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="10dp"
-							android:text="@string/mb_event_volume"
-							android:includeFontPadding="false"/>
-				</LinearLayout>
-			</LinearLayout>
-
-			<View
-					android:layout_width="match_parent"
-					android:layout_height="1dp"
-					android:layout_marginLeft="74dp"
-					android:background="@color/divider"/>
-
-			<LinearLayout
-					android:id="@+id/vibration_duration_bt"
-					android:layout_width="match_parent"
-					android:layout_height="70dp"
-					android:background="@drawable/selector"
-					android:clickable="true"
-					android:focusable="true"
-					android:gravity="center_vertical">
-
-				<View
-						android:layout_width="48dp"
-						android:layout_height="48dp"
-						android:layout_marginLeft="16dp"
-						android:background="@drawable/ic_vibration"/>
-
-				<LinearLayout
-						android:layout_width="match_parent"
-						android:layout_height="wrap_content"
-						android:layout_marginLeft="10dp"
-						android:layout_marginRight="16dp"
-						android:orientation="vertical">
-
-					<TextView
-							android:id="@+id/vibration_duration_tv"
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:layout_marginBottom="4dp"
-							android:textColor="?android:attr/textColorPrimary"
-							android:textSize="16dp"
-							android:text="20 Milliseconds"
-							android:includeFontPadding="false"/>
-
-					<TextView
-							android:layout_width="match_parent"
-							android:layout_height="wrap_content"
-							android:textColor="?android:attr/textColorSecondary"
-							android:textSize="10dp"
-							android:text="@string/mb_vibration_duration"
-							android:includeFontPadding="false"/>
-				</LinearLayout>
-			</LinearLayout>
 		</LinearLayout>
 	</ScrollView>
 	<android.support.v7.widget.Toolbar
