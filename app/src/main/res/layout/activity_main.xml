@@ -97,8 +97,6 @@
 						android:textColor="@android:color/white"
 						android:text="@string/drag"
 						android:includeFontPadding="false"
-						app:mb_event_volume="50"
-						app:mb_vibration_duration="20"
 						app:mb_rotation_speed="2"/>
 			</FrameLayout>
 			<View
