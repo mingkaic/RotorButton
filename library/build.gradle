@@ -1,0 +1,28 @@
+apply plugin: 'com.android.library'
+apply plugin: 'bintray-release'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    compile 'com.nineoldandroids:library:2.4.0+'
+}
+
+publish {
+    userOrg = 'mingkaic'
+    groupId = 'com.mingkaic'
+    artifactId = 'rotorbutton'
+    version = '1.0.0'
+    description = 'Android button which rotates around a pivot point.'
+}

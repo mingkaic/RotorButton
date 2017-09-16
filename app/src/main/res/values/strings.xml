@@ -1,0 +1,18 @@
+<resources>
+	<string name="app_name">RotorButton</string>
+	<string name="move">Move</string>
+	<string name="settings">SETTINGS</string>
+	<string name="mb_rotation_speed">mb_rotation_speed</string>
+	<string name="mb_offset_center">mb_offset_center</string>
+	<string name="mb_event_volume">mb_event_volume</string>
+	<string name="mb_vibration_duration">mb_vibration_duration</string>
+	<string name="current_orientation">CURRENT ORIENTATION</string>
+	<string name="tap_orientation">TAP ORIENTATION</string>
+	<string name="choose">Choose</string>
+	<string name="cancel">Cancel</string>
+	<string name="vibration_duration">Vibration Duration</string>
+	<string name="ok">OK</string>
+	<string name="rotation_speed">Movement</string>
+	<string name="center_offset">Center Offset</string>
+	<string name="volume">Volume</string>
+</resources>
