@@ -9,17 +9,20 @@ RotorButton is a button that can rotate around a center point. The widget takes 
 ##### .gif (25 fps)
 
 Button Rotating
-https://github.com/mingkaic/RotorButton/raw/master/demo_assets/optimal_rotation.gif
+
+![alt tag](https://github.com/mingkaic/RotorButton/raw/master/demo_assets/optimal_rotation.gif)
 
 Adjusting Offset
-https://github.com/mingkaic/RotorButton/raw/master/demo_assets/adjustoffset.gif
+
+![alt tag](https://github.com/mingkaic/RotorButton/raw/master/demo_assets/adjustoffset.gif)
 
 Adjusting Speed
-https://github.com/mingkaic/RotorButton/raw/master/demo_assets/adjustspeed.gif
+
+![alt tag](https://github.com/mingkaic/RotorButton/raw/master/demo_assets/adjustspeed.gif)
 
 ##### .mov
 
-https://github.com/mingkaic/RotorButton/raw/master/demo_assets/rotorbutton_demo.mov
+![alt tag](https://github.com/mingkaic/RotorButton/raw/master/demo_assets/rotorbutton_demo.mov)
 
 #### Sources
 
