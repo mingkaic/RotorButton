@@ -22,7 +22,7 @@ Adjusting Speed
 
 ##### .mov
 
-![alt tag](https://github.com/mingkaic/RotorButton/raw/master/demo_assets/rotorbutton_demo.mov)
+https://github.com/mingkaic/RotorButton/raw/master/demo_assets/rotorbutton_demo.mov
 
 #### Sources
 
